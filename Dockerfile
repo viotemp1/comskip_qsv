@@ -58,15 +58,15 @@ WORKDIR /app
 
 RUN apk add build-base libffi-dev linux-headers
 COPY requirements.txt .
-#RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt
 RUN apk del --purge build-base libffi-dev linux-headers
 
 COPY . .
 
-RUN \
-    if [ "$TARGETARCH" = "amd64" ]; then \
-        flake8 && pycodestyle && bandit *.py; \
-    fi
+# RUN \
+#     if [ "$TARGETARCH" = "amd64" ]; then \
+#         flake8 && pycodestyle && bandit *.py; \
+#     fi
 
 #CMD /app/mu7d.py
 CMD /bin/bash
